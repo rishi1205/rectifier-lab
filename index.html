@@ -151,6 +151,12 @@ function drawSch(){
   x.fillStyle=C('--mut');x.font='11px ui-monospace,Menlo,monospace';x.fillText('3-φ source (Y)',6,210);
  }
  legs.forEach(l=>{sw(x,l.x,95,l.top,on(l.top));sw(x,l.x,215,l.bot,on(l.bot));});
+ const ar=(X,Y,d)=>{x.fillStyle=C('--o');x.beginPath();const t={r:[[X-6,Y-5],[X+6,Y],[X-6,Y+5]],l:[[X+6,Y-5],[X-6,Y],[X+6,Y+5]],u:[[X-5,Y+6],[X,Y-6],[X+5,Y+6]],d:[[X-5,Y-6],[X,Y+6],[X+5,Y-6]]}[d];x.moveTo(t[0][0],t[0][1]);x.lineTo(t[1][0],t[1][1]);x.lineTo(t[2][0],t[2][1]);x.closePath();x.fill();};
+ if(any){ar(rx-60,40,'r');ar(rx,80,'d');ar(rx,230,'d');ar(rx-60,270,'l');
+  legs.forEach((l,j)=>{if(on(l.top))ar(l.x,55,'u');if(on(l.bot))ar(l.x,255,'u');
+   const dr=(on(l.top)?1:0)-(on(l.bot)?1:0);
+   if(dr)ar(one?(j?270:130):l.x-40,l.my,dr>0?'r':'l');});}
+ x.fillStyle=C('--o');x.font='10px ui-monospace,Menlo,monospace';x.textAlign='left';x.fillText('▶ amber arrows = current direction',6,304);
  // load
  x.fillStyle=C('--card');x.strokeStyle=any?g:wr;x.lineWidth=2;x.fillRect(rx-26,120,52,70);x.strokeRect(rx-26,120,52,70);
  x.fillStyle=C('--fg');x.font='bold 12px ui-monospace,Menlo,monospace';x.textAlign='center';x.fillText('R–L',rx,150);x.font='11px ui-monospace,Menlo,monospace';x.fillText('load',rx,166);
